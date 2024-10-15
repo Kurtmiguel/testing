@@ -17,6 +17,7 @@ export async function POST(request: Request) {
     await location.save();
     return NextResponse.json({ success: true, id: location._id });
   } catch (error) {
+    console.error('Error saving location data:', error);
     return NextResponse.json({ success: false, error: 'Error saving location data' }, { status: 500 });
   }
 }
@@ -32,6 +33,7 @@ export async function GET() {
       return NextResponse.json({ success: false, error: 'No location data found' }, { status: 404 });
     }
   } catch (error) {
+    console.error('Error fetching location data:', error);
     return NextResponse.json({ success: false, error: 'Error fetching location data' }, { status: 500 });
   }
 }
