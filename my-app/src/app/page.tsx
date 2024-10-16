@@ -19,7 +19,7 @@ export default function Home() {
                     <p>Latitude: {location.latitude}</p>
                     <p>Longitude: {location.longitude}</p>
                     <p>Last Update: {new Date(location.timestamp).toLocaleString()}</p>
-                    {location.batteryLevel && <p>Battery Level: {location.batteryLevel}%</p>}
+                    {location.batteryLevel && <p>Battery Level: {location.batteryLevel.toFixed(2)}%</p>}
                   </>
                 ) : (
                   <p>Loading location data...</p>

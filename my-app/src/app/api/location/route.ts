@@ -7,6 +7,7 @@ export async function POST(request: Request) {
 
   try {
     const body = await request.json();
+    console.log("Received location data:", body);
     const { latitude, longitude, timestamp, batteryLevel } = body;
     const location: ILocation = new Location({
       latitude,
@@ -15,6 +16,7 @@ export async function POST(request: Request) {
       batteryLevel,
     });
     await location.save();
+    console.log("Location saved to database");
     return NextResponse.json({ success: true, id: location._id });
   } catch (error) {
     console.error('Error saving location data:', error);

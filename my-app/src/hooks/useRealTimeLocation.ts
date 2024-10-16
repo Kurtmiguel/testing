@@ -12,6 +12,7 @@ export function useRealTimeLocation() {
           const data = await response.json();
           if (data.success) {
             setLocation(data.location);
+            console.log("Updated location:", data.location);
           }
         }
       } catch (error) {
