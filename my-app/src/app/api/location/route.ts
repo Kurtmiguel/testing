@@ -8,12 +8,11 @@ export async function POST(request: Request) {
   try {
     const body = await request.json();
     console.log("Received location data:", body);
-    const { latitude, longitude, timestamp, batteryLevel } = body;
+    const { latitude, longitude, timestamp } = body;
     const location: ILocation = new Location({
       latitude,
       longitude,
       timestamp: new Date(timestamp),
-      batteryLevel,
     });
     await location.save();
     console.log("Location saved to database");

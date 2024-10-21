@@ -1,6 +1,9 @@
 'use client';
 
 import { useRealTimeLocation } from '../hooks/useRealTimeLocation';
+import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
+import { LatLngExpression } from 'leaflet';
+import 'leaflet/dist/leaflet.css';
 
 export default function Home() {
   const location = useRealTimeLocation();
@@ -19,7 +22,23 @@ export default function Home() {
                     <p>Latitude: {location.latitude}</p>
                     <p>Longitude: {location.longitude}</p>
                     <p>Last Update: {new Date(location.timestamp).toLocaleString()}</p>
-                    {location.batteryLevel && <p>Battery Level: {location.batteryLevel.toFixed(2)}%</p>}
+                    <div style={{ height: '400px', width: '100%' }}>
+                      {typeof window !== 'undefined' && (
+                        <MapContainer 
+                          center={[location.latitude, location.longitude] as LatLngExpression} 
+                          zoom={13} 
+                          style={{ height: '100%', width: '100%' }}
+                        >
+                          <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
+                          <Marker position={[location.latitude, location.longitude] as LatLngExpression}>
+                            <Popup>
+                              Dog's location<br />
+                              Last update: {new Date(location.timestamp).toLocaleString()}
+                            </Popup>
+                          </Marker>
+                        </MapContainer>
+                      )}
+                    </div>
                   </>
                 ) : (
                   <p>Loading location data...</p>

@@ -5,7 +5,6 @@ export interface ILocation extends Document {
   latitude: number;
   longitude: number;
   timestamp: Date;
-  batteryLevel?: number;
 }
 
 let Location: Model<ILocation>;
