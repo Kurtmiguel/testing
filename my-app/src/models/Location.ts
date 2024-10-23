@@ -5,14 +5,8 @@ export interface ILocation extends Document {
   latitude: number;
   longitude: number;
   timestamp: Date;
+  batteryLevel: number;
+  deviceId?: string;
 }
 
-let Location: Model<ILocation>;
-
-try {
-  Location = mongoose.model<ILocation>('Location');
-} catch {
-  Location = mongoose.model<ILocation>('Location', locationSchema);
-}
-
-export { Location };
+export const Location = mongoose.models.Location || mongoose.model<ILocation>('Location', locationSchema);
